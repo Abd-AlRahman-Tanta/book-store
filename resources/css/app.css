@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+
+html {
+    font-family: "Almarai", sans-serif;
+}
+
+@theme {
+    --breakpoint-2xl: 1460px;
+    --breakpoint-xl: 1279px;
+    --breakpoint-lg: 1023px;
+    --breakpoint-md: 767px;
+    --breakpoint-sm: 639px;
+    --breakpoint-desc: 992px;
+    --breakpoint-tab: 768px;
+    --breakpoint-mob: 576px;
+    --shadow-myShadow: 0 8px 40px 0 #585C5F33;
+    --text-mainHead: 54px;
+    --text-pararellHead: 32px;
+    --text-head: 46px;
+    --radius-corner: 20px;
+    --color-border: #E7E7E7;
+    --color-resolve: #0C527E;
+    --color-heading: #414141;
+    --color-description: #727272;
+    --color-footer: #127EC2;
+    --color-navColor: #0F68A0;
+    --color-blackButton: #083B5C;
+    --color-specialOrange: #F6A31F;
+    --color-label: #127EC280;
+    --spacing-descSaveSpace: 120px;
+    --spacing-mobSaveSpace: 20px;
+
+}
+
+
+
+.swiper-pagination-bullet {
+    cursor: pointer !important;
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 50% !important;
+    background-color: #D9D9D9 !important;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #127EC2 !important;
+}
+
+
+
+/* .swiper-button-prev → سهم الرجوع (يسار).
+
+.swiper-button-next → سهم التقدم (يمين).
+
+.swiper-pagination → الديف الحاوي لكل النقاط.
+
+.swiper-pagination-bullet → كل نقطة فردية.
+
+.swiper-pagination-bullet-active → النقطة النشطة (اللي ظاهر عندها السلايد الحالي). */
