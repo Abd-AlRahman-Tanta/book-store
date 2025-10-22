@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 import "../css/app.css";
 import './bootstrap';
 
+
+
 createInertiaApp({
     resolve: name => {
         const pages = import.meta.glob('./pages/**/*.tsx', { eager: true })

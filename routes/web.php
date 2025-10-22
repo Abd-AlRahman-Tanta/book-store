@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\InvoicesController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,9 +19,6 @@ Route::controller(AuthenticationController::class)->group(function () {
 Route::controller(BookController::class)->group(function () {
     Route::middleware("checkAuth")->group(function () {
         Route::get("/home", "bookStore");
-        Route::get("/cart", "showCartPage");
-        Route::post("/invoice", "addInvoice");
-        Route::get("/showInvoices", "showInvoices");
     });
     Route::middleware("checkIfAdmin")->group(function () {
         Route::delete("/deleteBook", "deleteBook");
@@ -28,5 +26,12 @@ Route::controller(BookController::class)->group(function () {
         Route::get("/addBook", "showAddBookPage");
         Route::post("/addBook", "addBook");
         Route::put("/editBook/{id}", "editBook");
+    });
+});
+Route::controller(InvoicesController::class)->group(function () {
+    Route::middleware("checkAuth")->group(function () {
+        Route::get("/cart", "showCartPage");
+        Route::post("/invoice", "addInvoice");
+        Route::get("/showInvoices", "showInvoices");
     });
 });

@@ -1,7 +1,7 @@
 import { router, usePage } from "@inertiajs/react";
 import { FormEvent, useState } from "react";
 const ProductForm = ({ book_name, id, price, description, image }: { book_name?: string, id?: string, description?: string, image?: string, price?: string }) => {
-    const [selectedImage, setSelectedImage] = useState<string>(`${image ? "/storage/" + image : "/storage/book.jpg"}`);
+    const [selectedImage, setSelectedImage] = useState<string>(`${image ? "/storage/" + image : "/storage/book.png"}`);
     const { url } = usePage();
     const [render, setRender] = useState<boolean>(false);
     const sendData = (e: FormEvent) => {
@@ -22,11 +22,15 @@ const ProductForm = ({ book_name, id, price, description, image }: { book_name?:
             }
         });
         if (url == "/addBook") {
-            router.post("/addBook", data)
+            router.post("/addBook", data, {
+                onFinish: () => setRender(false)
+            })
         }
         else {
             data.append("_method", "PUT");
-            router.post("/editBook/" + id, data)
+            router.post("/editBook/" + id, data, {
+                onFinish: () => setRender(false)
+            })
         }
     }
     return (

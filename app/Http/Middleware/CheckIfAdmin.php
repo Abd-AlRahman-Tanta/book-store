@@ -19,6 +19,6 @@ class CheckIfAdmin
         if (Auth::user()["role"] == "admin")
             return $next($request);
         else
-            return redirect("/home")->with("error", "You Are Not An Admin!");
+            return redirect()->back()->with("error", "You Are Not An Admin!");
     }
 }

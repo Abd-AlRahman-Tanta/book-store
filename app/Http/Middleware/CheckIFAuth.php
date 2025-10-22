@@ -18,7 +18,7 @@ class CheckIFAuth
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check())
-            return Inertia::location("/login");
+            return redirect("/login");
         return $next($request);
     }
 }

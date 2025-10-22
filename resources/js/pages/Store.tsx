@@ -2,7 +2,6 @@ import { Link, router, usePage } from "@inertiajs/react";
 import { ReactNode, useState } from "react";
 import { BooksPaginationProps, useBook, userProps } from "..";
 import BookCard from "../components/BookCard";
-import Button from "../components/Button";
 import Nav from "../components/Nav";
 import Notification from "../components/Notification";
 import PaginationLinks from "../components/PaginationLinks";
@@ -26,9 +25,8 @@ const Store = () => {
             <Nav logout={logout} setSearch={setSearch} />
             {
                 user["role"] == "admin" &&
-                <Link href="/addBook">
-                    <Button text="Add Book To Store" className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition duration-200  mx-auto block mt-12 ">
-                    </Button>
+                <Link href="/addBook" className="block mx-auto w-fit px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition duration-200  mt-12 ">
+                    Add Book
                 </Link>
             }
             <div className="w-full grid grid-cols-3 max-desc:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-5 my-8 px-descSaveSpace max-desc:px-mobSaveSpace ">
