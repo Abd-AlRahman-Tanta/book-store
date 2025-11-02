@@ -44,6 +44,15 @@ const Store = () => {
                 }
             </div>
             {search == "" && <PaginationLinks books={books} />}
+            {
+                user["role"] == "admin" &&
+                <Link
+                    href="/trash"
+                    className="block mx-auto w-fit my-10 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg"
+                >
+                    Go to Trash
+                </Link>
+            }
         </div>
     );
 }

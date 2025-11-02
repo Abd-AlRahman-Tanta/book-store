@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\BooksRepo;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class BooksService
@@ -66,12 +67,26 @@ class BooksService
         ]);
         return $this->bookRepo->deleteBook($req);
     }
-
+    public function handleGetTrashedBook()
+    {
+        return $this->bookRepo->onlyTrashed();
+    }
+    public function handleRestoreBook($id)
+    {
+        return $this->bookRepo->restoreBook($id);
+    }
 
     public function handleGetBook($id)
     {
+        Log::info("send request to book repo for restore book");
         return  $this->bookRepo->getBook($id);
     }
+    public function handleForceDelete($id)
+    {
+        Log::info("send request to book repo for restore book");
+        return  $this->bookRepo->finalDelete($id);
+    }
+
 
 
     public function handleGetLatestBooks($n)

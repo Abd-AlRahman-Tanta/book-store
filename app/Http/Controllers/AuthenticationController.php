@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException as ValidationValidationException;
 use Inertia\Inertia;
 
@@ -23,14 +24,19 @@ class AuthenticationController extends Controller
     public function registerPage()
     {
 
-        return Inertia::render("Register", [
-            "inputs" => [
-                ["name" => "user_name", "type" => "text", "placeHolder" => "Name"],
-                ["name" => "email", "type" => "email", "placeHolder" => "Email"],
-                ["name" => "password", "type" => "password", "placeHolder" => "Password"],
-                ["name" => "password_confirmation", "type" => "password", "placeHolder" => "Password_Confirmation"],
-            ]
-        ]);
+        try {
+            Log::info("tart egister");
+            return Inertia::render("Register", [
+                "inputs" => [
+                    ["name" => "user_name", "type" => "text", "placeHolder" => "Name"],
+                    ["name" => "email", "type" => "email", "placeHolder" => "Email"],
+                    ["name" => "password", "type" => "password", "placeHolder" => "Password"],
+                    ["name" => "password_confirmation", "type" => "password", "placeHolder" => "Password_Confirmation"],
+                ]
+            ]);
+        } catch (\Exception $e) {
+            Log::error("error", $e->getMessage());
+        }
     }
 
     public function loginPage()

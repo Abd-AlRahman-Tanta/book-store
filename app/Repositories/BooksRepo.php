@@ -18,8 +18,7 @@ class BooksRepo
     }
     public function editBook($editedBook, $id)
     {
-        $book = Book::find($id);
-        return $book->update($editedBook);
+        return Book::find($id)->update($editedBook);
     }
     public function deleteBook($req)
     {
@@ -28,5 +27,17 @@ class BooksRepo
     public function getLatestBooks($n)
     {
         return $n != "all" ? Book::latest()->paginate($n) : Book::all();
+    }
+    public function onlyTrashed()
+    {
+        return Book::onlyTrashed()->get();
+    }
+    public function restoreBook($id)
+    {
+        return Book::onlyTrashed()->find($id)->restore();
+    }
+    public function finalDelete($id)
+    {
+        Book::onlyTrashed()->find($id)->forceDelete();
     }
 }

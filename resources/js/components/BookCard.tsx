@@ -5,6 +5,7 @@ import { useBook } from "..";
 const BookCard = ({ book_name, id, price, description, image }: { book_name: string, id: string, description: string, image: string, price: string }) => {
 
     const { user } = usePage().props;
+    const { url } = usePage();
     const { addBook, books } = useBook();
     const [render, setRender] = useState<boolean>(false);
     const addToCart = (id: string) => {
@@ -12,9 +13,21 @@ const BookCard = ({ book_name, id, price, description, image }: { book_name: str
     }
     const deleteBook = () => {
         setRender(true);
-        router.visit("/deleteBook", {
-            method: "delete",
-            data: { id: id },
+        url == "/home" &&
+            router.visit("/deleteBook", {
+                method: "delete",
+                data: { id: id },
+                onFinish: () => setRender(false)
+            });
+        url == "/trash" &&
+            router.delete("/force-delete/" + id, {
+                onFinish: () => setRender(false)
+            });
+    }
+    const restoreBook = () => {
+        setRender(true);
+        router.visit("/restore/" + id, {
+            method: "get",
             onFinish: () => setRender(false)
         });
     }
@@ -37,6 +50,11 @@ const BookCard = ({ book_name, id, price, description, image }: { book_name: str
                 //@ts-ignore
                 user["role"] == "admin" &&
                 <button onClick={deleteBook} className="cursor-pointer my-4  px-4 py-2 bg-red-600 text-white font-medium rounded-lg shadow-sm hover:bg-red-700 hover:shadow-md transition duration-200 active:scale-95">Delete <span className={` ${render ? "block" : "hidden"}  border-2 border-y-transparent border-x-white rounded-full w-7 h-7 bg-transparent animate-spin duration-500 `}></span></button>
+            }
+            {
+                //@ts-ignore
+                user["role"] == "admin" && url == "/trash" &&
+                <button onClick={restoreBook} className="cursor-pointer my-4  px-4 py-2 bg-green-600 text-white font-medium rounded-lg shadow-sm hover:bg-green-700 hover:shadow-md transition duration-200 active:scale-95">Restore <span className={` ${render ? "block" : "hidden"}  border-2 border-y-transparent border-x-white rounded-full w-7 h-7 bg-transparent animate-spin duration-500 `}></span></button>
             }
             {
                 //@ts-ignore

@@ -21,7 +21,10 @@ Route::controller(BookController::class)->group(function () {
         Route::get("/home", "bookStore");
     });
     Route::middleware("checkIfAdmin")->group(function () {
+        Route::get("/trash", "onlyTrash");
+        Route::get("/restore/{id}", "restore");
         Route::delete("/deleteBook", "deleteBook");
+        Route::delete("/force-delete/{id}", "forceDelete");
         Route::get("/editBook/{id}", "showEditBookPage");
         Route::get("/addBook", "showAddBookPage");
         Route::post("/addBook", "addBook");
